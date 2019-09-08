@@ -12,7 +12,6 @@ public class CarUnit {
     @GeneratedValue
     Long id;
     private String registration;
-    private Date insuranceDate;
     private Date lastServiceDate;
     private int instalment;
     private int mileage;
@@ -34,13 +33,6 @@ public class CarUnit {
         this.registration = registration;
     }
 
-    public Date getInsuranceDate() {
-        return insuranceDate;
-    }
-
-    public void setInsuranceDate(Date insuranceDate) {
-        this.insuranceDate = insuranceDate;
-    }
 
     public Date getLastServiceDate() {
         return lastServiceDate;
