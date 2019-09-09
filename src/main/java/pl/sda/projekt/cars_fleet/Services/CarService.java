@@ -44,7 +44,8 @@ public class CarService {
     }
 
     public Car getCarByModelAndMark(String mark, String model) {
-        return carRepository.findByMarkAndModel(mark, model).orElseThrow(() -> new ObjectNotFoundException(model, Car.class.getName()));
+        return carRepository.findByMarkAndModel(mark, model)
+                .orElseThrow(() -> new ObjectNotFoundException(model, Car.class.getName()));
     }
 
     public Car updateCar(String mark, String model, Car car) {
