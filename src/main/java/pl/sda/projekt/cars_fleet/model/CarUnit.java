@@ -1,16 +1,17 @@
 package pl.sda.projekt.cars_fleet.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 public class CarUnit {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
+    @ManyToOne
+    private Car car;
+    private String model;
     private String registration;
     private Date lastServiceDate;
     private int instalment;
@@ -24,6 +25,13 @@ public class CarUnit {
         this.id = id;
     }
 
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
 
     public String getRegistration() {
         return registration;
