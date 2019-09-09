@@ -5,13 +5,10 @@ import org.hibernate.ObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import pl.sda.projekt.cars_fleet.dto.CarForm;
 import pl.sda.projekt.cars_fleet.model.Car;
-import pl.sda.projekt.cars_fleet.model.CarUnit;
 import pl.sda.projekt.cars_fleet.repository.CarRepository;
 import pl.sda.projekt.cars_fleet.repository.CarUnitRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

@@ -7,16 +7,19 @@ import pl.sda.projekt.cars_fleet.model.CarUnit;
 import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CarForm {
+public class CarUnitForm {
 
     private String mark;
     private String model;
 
     private String registration;
-    private Date lastServiceDate;
-    private int instalment;
-    private int mileage;
 
+    private double insurancePrice;
+    private Date insuranceDate;
+    private int instalment;
+
+    private Date lastServiceDate;
+    private int mileage;
 
 
         public String getMark() {
@@ -49,6 +52,22 @@ public class CarForm {
 
     public void setLastServiceDate(Date lastServiceDate) {
         this.lastServiceDate = lastServiceDate;
+    }
+
+    public double getInsurancePrice() {
+        return insurancePrice;
+    }
+
+    public void setInsurancePrice(double insurancePrice) {
+        this.insurancePrice = insurancePrice;
+    }
+
+    public Date getInsuranceDate() {
+        return insuranceDate;
+    }
+
+    public void setInsuranceDate(Date insuranceDate) {
+        this.insuranceDate = insuranceDate;
     }
 
     public int getInstalment() {

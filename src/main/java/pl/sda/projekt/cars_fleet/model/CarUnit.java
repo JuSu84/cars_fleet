@@ -1,21 +1,21 @@
 package pl.sda.projekt.cars_fleet.model;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 public class CarUnit {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     @ManyToOne
     private Car car;
-    private String model;
     private String registration;
-    private Date lastServiceDate;
-    private int instalment;
-    private int mileage;
+    @OneToOne
+    private Insurance insurance;
+    @OneToOne
+    private CarServicing carServicing;
+
 
     public Long getId() {
         return id;
@@ -33,6 +33,7 @@ public class CarUnit {
         this.car = car;
     }
 
+
     public String getRegistration() {
         return registration;
     }
@@ -42,27 +43,19 @@ public class CarUnit {
     }
 
 
-    public Date getLastServiceDate() {
-        return lastServiceDate;
+    public Insurance getInsurance() {
+        return insurance;
     }
 
-    public void setLastServiceDate(Date lastServiceDate) {
-        this.lastServiceDate = lastServiceDate;
+    public void setInsurance(Insurance insurance) {
+        this.insurance = insurance;
     }
 
-    public int getInstalment() {
-        return instalment;
+    public CarServicing getCarServicing() {
+        return carServicing;
     }
 
-    public void setInstalment(int instalment) {
-        this.instalment = instalment;
-    }
-
-    public int getMileage() {
-        return mileage;
-    }
-
-    public void setMileage(int mileage) {
-        this.mileage = mileage;
+    public void setCarServicing(CarServicing carServicing) {
+        this.carServicing = carServicing;
     }
 }

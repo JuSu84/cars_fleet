@@ -2,7 +2,7 @@ package pl.sda.projekt.cars_fleet.api;
 
 import org.springframework.web.bind.annotation.*;
 import pl.sda.projekt.cars_fleet.Services.CarUnitService;
-import pl.sda.projekt.cars_fleet.dto.CarForm;
+import pl.sda.projekt.cars_fleet.dto.CarUnitForm;
 import pl.sda.projekt.cars_fleet.model.CarUnit;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class CarUnitController {
     }
 
     @PostMapping
-    public CarUnit addNewCarUnit(@RequestBody CarForm carForm) {
+    public CarUnit addNewCarUnit(@RequestBody CarUnitForm carForm) {
         return carUnitService.addNewCarUnit(carForm);
     }
 

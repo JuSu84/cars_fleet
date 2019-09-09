@@ -22,11 +22,12 @@ public class DataSetup implements CommandLineRunner {
 
     @Override
     public void run (String... args) throws Exception {
-        IntStream.range(0,4).forEach((i) -> {
+        String[] models = {"Mondeo", "Mustang", "Fiesta", "Focus"};
+        IntStream.range(0, 4).forEach((i) -> {
             Car car = new Car();
-            car.setModel(format("model%d", i));
-            car.setMark(format("mark%d", i));
+            car.setModel(models[i]);
+            car.setMark("ford");
             carRepository.save(car);
         });
-    }
-}
+
+    }}
