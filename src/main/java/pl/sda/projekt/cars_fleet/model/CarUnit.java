@@ -39,7 +39,7 @@ public class CarUnit {
     }
 
     public void setRegistration(String registration) {
-        this.registration = registration;
+        this.registration = registration.toLowerCase();
     }
 
 

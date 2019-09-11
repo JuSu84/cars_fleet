@@ -58,6 +58,16 @@ public class CarService {
         return carRepository.save(foundCar);
     }
 
+    public Car updateCar(Long id, Car car) {
+        Car foundCar = carRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException(id, Car.class.getName()));
+
+        foundCar.setMark(car.getMark());
+        foundCar.setModel(car.getModel());
+
+        return carRepository.save(foundCar);
+    }
+
     public void deleteCar(Long id) {
         if (carRepository.existsById(id)) {
             carRepository.deleteById(id);

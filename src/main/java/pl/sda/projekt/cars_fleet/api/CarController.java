@@ -18,11 +18,11 @@ public class CarController {
 
     @PostMapping
     public Car addNewCar(@RequestBody Car car) {
-        return  carService.addNewCar(car);
+        return carService.addNewCar(car);
     }
 
     @GetMapping
-    public List<Car> getAllCars(){
+    public List<Car> getAllCars() {
         return carService.getAllCars();
     }
 
@@ -31,9 +31,14 @@ public class CarController {
         return carService.getCarById(id);
     }
 
+    @PutMapping("{id}")
+    public Car updateMessageById(@PathVariable("id") Long id, @RequestBody Car car) {
+        return carService.updateCar(id,car);
+    }
+
     @PutMapping("{mark},{model}")
-    public Car updateMessage(@PathVariable("mark") String mark,@PathVariable("model") String model, @RequestBody Car car) {
-        return carService.updateCar(mark,model, car);
+    public Car updateMessage(@PathVariable("mark") String mark, @PathVariable("model") String model, @RequestBody Car car) {
+        return carService.updateCar(mark, model, car);
     }
 
     @DeleteMapping("{id}")
@@ -41,7 +46,6 @@ public class CarController {
         carService.deleteCar(id);
     }
 //
-
 
 
 }

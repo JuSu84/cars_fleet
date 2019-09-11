@@ -8,8 +8,8 @@ import java.util.Optional;
 
 public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
-    Optional<Employee> findByLastName(String lastName);
-    Optional<Employee> findByFirstName(String firstName);
-    Optional<Employee> findByFirstNameAndLastName (String firstName, String lastName);
+    List<Employee> findAllByLastName(String lastName);
+    List<Employee> findAllByFirstName(String firstName);
+    List<Employee> findAllByFirstNameAndLastName (String firstName, String lastName);
 
 }

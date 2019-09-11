@@ -34,7 +34,7 @@ public class CarUnitController {
 
     @GetMapping("{mark}")
     public List<CarUnit> getListOfCarUnitsByMark(@PathVariable("mark") String mark) {
-        return carUnitService.getListOfCarUnitsByMark(mark);
+        return carUnitService.getListOfCarUnitsByMark(mark.toLowerCase());
     }
 
 

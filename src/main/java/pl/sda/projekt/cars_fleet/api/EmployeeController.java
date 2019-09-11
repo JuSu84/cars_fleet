@@ -27,19 +27,19 @@ public class EmployeeController {
     }
 
     @GetMapping("{id}")
-    public Employee getEmployeeUnitById(@PathVariable("id") Long id) {
+    public Employee getEmployeeById(@PathVariable("id") Long id) {
         return employeeService.getEmployeeById(id);
     }
 
-//    @GetMapping("{lastname}")
-//    public Employee getEmployeeByLastName(@PathVariable("lastname") String lastName) {
-//        return employeeService.getEmployeeByLastName(lastName);
-//    }
-//
-//    @GetMapping("{firstname}")
-//    public Employee getEmployeeByFirstName(@PathVariable("firstname") String firstName) {
-//        return employeeService.getEmployeeByFirstName(firstName);
-//    }
+    @GetMapping("/lastname{lastname}")
+    public List<Employee> getEmployeeByLastName(@PathVariable("lastname") String lastName) {
+        return employeeService.getEmployeeByLastName(lastName.toLowerCase());
+    }
+
+    @GetMapping("/firstname{firstname}")
+    public List<Employee> getEmployeeByFirstName(@PathVariable("firstname") String firstName) {
+        return employeeService.getEmployeeByFirstName(firstName.toLowerCase());
+    }
 
     @DeleteMapping("{id}")
     public void deleteEmployee(@PathVariable("id") Long id) {

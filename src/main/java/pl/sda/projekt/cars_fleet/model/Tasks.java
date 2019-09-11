@@ -28,7 +28,7 @@ public class Tasks {
     }
 
     public void setTaskName(String taskName) {
-        this.taskName = taskName;
+        this.taskName = taskName.toLowerCase();
     }
 
     public Date getDoneDate() {

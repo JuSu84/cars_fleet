@@ -29,6 +29,8 @@ public class DataSetup implements CommandLineRunner {
     public void run (String... args) throws Exception {
         String[] models = {"Mondeo", "Mustang", "Fiesta", "Focus"};
         String[] names = {"Tomek", "Romek", "Wojtek", "Irek"};
+        String[] lastNames= {"Kowalski", "Tatarak", "Noga", "Pietruszka"};
+
 
         IntStream.range(0, 4).forEach((i) -> {
             Car car = new Car();
@@ -43,7 +45,7 @@ public class DataSetup implements CommandLineRunner {
 
             Employee employee = new Employee();
             employee.setFirstName(names[i]);
-            employee.setLastName("Kowalski");
+            employee.setLastName(lastNames[i]);
             employeeRepository.save(employee);
         });
 

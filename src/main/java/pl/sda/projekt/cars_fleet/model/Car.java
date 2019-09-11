@@ -28,16 +28,16 @@ public class Car {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public String getMark() {
         return mark;
     }
 
     public void setMark(String mark) {
-        this.mark = mark;
+        this.mark = mark.toLowerCase();
     }
 
     public String getModel() {
@@ -45,7 +45,7 @@ public class Car {
     }
 
     public void setModel(String model) {
-        this.model = model;
+        this.model = model.toLowerCase();
     }
 
     @Override
