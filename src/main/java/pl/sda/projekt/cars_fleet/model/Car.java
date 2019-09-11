@@ -1,9 +1,8 @@
 package pl.sda.projekt.cars_fleet.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -23,6 +22,9 @@ public class Car {
     Long id;
     private String mark;
     private String model;
+
+    @OneToMany(mappedBy = "car")
+    private List<CarUnit> carUnits = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -47,6 +49,19 @@ public class Car {
     public void setModel(String model) {
         this.model = model.toLowerCase();
     }
+
+    public List<CarUnit> getCarUnits() {
+        return carUnits;
+    }
+
+    public void setCarUnits(List<CarUnit> carUnits) {
+        this.carUnits = carUnits;
+    }
+
+    public void addCarUnitToList(CarUnit carUnit){
+        this.carUnits.add(carUnit);
+    }
+
 
     @Override
     public boolean equals(Object o) {

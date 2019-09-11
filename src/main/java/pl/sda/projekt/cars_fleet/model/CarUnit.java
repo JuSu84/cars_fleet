@@ -1,5 +1,7 @@
 package pl.sda.projekt.cars_fleet.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,13 +10,16 @@ public class CarUnit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    @JsonIgnore
     @ManyToOne
+    @JoinColumn(name = "car_id")
     private Car car;
     private String registration;
     @OneToOne
     private Insurance insurance;
     @OneToOne
     private CarServicing carServicing;
+
 
 
     public Long getId() {
@@ -30,8 +35,10 @@ public class CarUnit {
     }
 
     public void setCar(Car car) {
+
         this.car = car;
     }
+
 
 
     public String getRegistration() {

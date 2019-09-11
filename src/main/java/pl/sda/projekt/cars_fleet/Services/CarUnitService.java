@@ -37,15 +37,19 @@ public class CarUnitService {
 
     private CarUnit createNewCarUnit(CarUnitForm form) {
 
+
         Car car = carService.addNewCar(new Car(form.getMark(), form.getModel()));
+
         Insurance insurance = insuranceService.addNewInsurance(new Insurance(form.getInsuranceDate(),form.getInsurancePrice(),form.getInstalment()));
         CarServicing carServicing = carServicingService.addNewCarServicing(new CarServicing(form.getLastServiceDate(),form.getMileage()));
         CarUnit result = new CarUnit();
-        result.setCar(car);
+
         result.setRegistration(form.getRegistration());
         result.setInsurance(insurance);
         result.setCarServicing(carServicing);
 
+        result.setCar(car);
+        result.getCar().addCarUnitToList(result);
         return result;
     }
 

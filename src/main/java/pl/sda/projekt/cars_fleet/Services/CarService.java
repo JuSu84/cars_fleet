@@ -32,6 +32,7 @@ public class CarService {
     public Car addNewCar(Car car) {
         if (getAllCars().contains(car)) {
             Car savedCar = carRepository.findByMarkAndModel(car.getMark(), car.getModel()).get();
+
             return savedCar;
         }
         return carRepository.save(car);

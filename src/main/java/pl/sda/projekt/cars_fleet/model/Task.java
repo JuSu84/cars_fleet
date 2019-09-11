@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import java.util.Date;
 
 @Entity
-public class Tasks {
+public class Task {
 
     @Id
     @GeneratedValue
@@ -14,6 +14,7 @@ public class Tasks {
     private String taskName;
     private Date doneDate;
     private Date taskDeadline;
+    private boolean done;
 
     public Long getId() {
         return id;
@@ -45,5 +46,13 @@ public class Tasks {
 
     public void setTaskDeadline(Date taskDeadline) {
         this.taskDeadline = taskDeadline;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
     }
 }
