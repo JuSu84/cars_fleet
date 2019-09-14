@@ -2,26 +2,43 @@ package pl.sda.projekt.cars_fleet.Services;
 
 import com.google.common.collect.Lists;
 import org.hibernate.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.sda.projekt.cars_fleet.model.Car;
 import pl.sda.projekt.cars_fleet.model.Employee;
+import pl.sda.projekt.cars_fleet.model.Role;
 import pl.sda.projekt.cars_fleet.repository.EmployeeRepository;
+import pl.sda.projekt.cars_fleet.repository.RoleRepository;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
 public class EmployeeService {
 
     private EmployeeRepository employeeRepository;
+    private RoleRepository roleRepository;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
-    public EmployeeService(EmployeeRepository employeeRepository) {
+    @Autowired
+    public EmployeeService(EmployeeRepository employeeRepository,
+                           RoleRepository roleRepository,
+                           BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.employeeRepository = employeeRepository;
+        this.roleRepository = roleRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
 
     public Employee addNewEmployee(Employee employee){
+        employee.setPassword(bCryptPasswordEncoder.encode(employee.getPassword()));
+        Role userRole = roleRepository.findByRole("ADMIN");
+        userRole.setRole("ADMIN");
+        employee.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+        employee.setActive(1);
         return employeeRepository.save(employee);
     }
 
@@ -59,6 +76,7 @@ public class EmployeeService {
     public Employee updateEmployee(Long id, Employee employee) {
         Employee foundEmployee = employeeRepository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException(id, Employee.class.getName()));
+
 
         foundEmployee.setFirstName(employee.getFirstName());
         foundEmployee.setLastName(employee.getLastName());

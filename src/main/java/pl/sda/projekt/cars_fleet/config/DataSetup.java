@@ -36,7 +36,7 @@ public class DataSetup implements CommandLineRunner {
             Car car = new Car();
             car.setModel(models[i]);
             car.setMark("ford");
-            carRepository.save(car);
+           // carRepository.save(car);
 
         });
 
@@ -46,7 +46,7 @@ public class DataSetup implements CommandLineRunner {
             Employee employee = new Employee();
             employee.setFirstName(names[i]);
             employee.setLastName(lastNames[i]);
-            employeeRepository.save(employee);
+           // employeeRepository.save(employee);
         });
 
     }
