@@ -26,7 +26,7 @@ public class Employee {
     @NotBlank(message = "*Please provide your password")
     private String password;
 
-//    @JsonIgnore
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "employee_role", joinColumns = @JoinColumn(name = "employee_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

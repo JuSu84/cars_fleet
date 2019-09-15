@@ -1,9 +1,6 @@
 package pl.sda.projekt.cars_fleet.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Role {
@@ -14,12 +11,7 @@ public class Role {
 
     private String role;
 
-//    @ManyToMany
-//    @JoinTable(
-//            name = "eployee_roles",
-//            joinColumns = @JoinColumn(name = "role_id"),
-//            inverseJoinColumns = @JoinColumn(name = "employee_id"))
-//    Set<Employee> employeeRoles;
+
     public int getId() {
         return id;
     }
@@ -36,12 +28,6 @@ public class Role {
         this.role = role;
     }
 
-//    public Set<Employee> getEmployeeRoles() {
-//        return employeeRoles;
-//    }
-//
-//    public void setEmployeeRoles(Set<Employee> employeeRoles) {
-//        this.employeeRoles = employeeRoles;
-//    }
+
 }
 

@@ -1,8 +1,13 @@
 package pl.sda.projekt.cars_fleet.Services;
 
 import com.google.common.collect.Lists;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.sda.projekt.cars_fleet.model.Employee;

@@ -5,8 +5,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import pl.sda.projekt.cars_fleet.model.Car;
 import pl.sda.projekt.cars_fleet.model.Employee;
+import pl.sda.projekt.cars_fleet.model.Role;
 import pl.sda.projekt.cars_fleet.repository.CarRepository;
 import pl.sda.projekt.cars_fleet.repository.EmployeeRepository;
+import pl.sda.projekt.cars_fleet.repository.RoleRepository;
 
 import java.util.stream.IntStream;
 
@@ -15,12 +17,17 @@ public class DataSetup implements CommandLineRunner {
 
     private CarRepository carRepository;
     private EmployeeRepository employeeRepository;
+    private RoleRepository roleRepository;
 
     @Autowired
-    public DataSetup(CarRepository carRepository, EmployeeRepository employeeRepository) {
+    public DataSetup(CarRepository carRepository, EmployeeRepository employeeRepository, RoleRepository roleRepository) {
         this.carRepository = carRepository;
         this.employeeRepository = employeeRepository;
+        this.roleRepository = roleRepository;
     }
+
+
+
 
 
     @Override
@@ -28,6 +35,7 @@ public class DataSetup implements CommandLineRunner {
         String[] models = {"Mondeo", "Mustang", "Fiesta", "Focus"};
         String[] names = {"Tomek", "Romek", "Wojtek", "Irek"};
         String[] lastNames= {"Kowalski", "Tatarak", "Noga", "Pietruszka"};
+
 
 
         IntStream.range(0, 4).forEach((i) -> {
@@ -46,6 +54,8 @@ public class DataSetup implements CommandLineRunner {
             employee.setLastName(lastNames[i]);
            // employeeRepository.save(employee);
         });
+
+
 
     }
 }

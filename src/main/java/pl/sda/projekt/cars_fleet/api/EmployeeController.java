@@ -1,5 +1,8 @@
 package pl.sda.projekt.cars_fleet.api;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.projekt.cars_fleet.Services.EmployeeService;
 import pl.sda.projekt.cars_fleet.model.Employee;
@@ -10,14 +13,18 @@ import java.util.List;
 @RequestMapping("/employees/")
 public class EmployeeController {
 
+
+    private SecurityContext securityContext;
+
     private EmployeeService employeeService;
 
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public Employee addNewEmployee(@RequestBody Employee employee){
+    public Employee addNewEmployee(@RequestBody Employee employee) {
         return employeeService.addNewEmployee(employee);
     }
 
