@@ -1,7 +1,6 @@
 package pl.sda.projekt.cars_fleet.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;

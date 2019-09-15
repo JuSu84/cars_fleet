@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface CarRepository extends CrudRepository<Car,Long> {
 
-    Optional<Car> findByMark( String mark);
+    Optional<Car> findByMark(String mark);
 
     Optional<Car> findByModel(String model);
 

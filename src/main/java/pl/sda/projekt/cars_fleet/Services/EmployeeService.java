@@ -5,13 +5,12 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.sda.projekt.cars_fleet.model.Car;
 import pl.sda.projekt.cars_fleet.model.Employee;
+import pl.sda.projekt.cars_fleet.model.Login;
 import pl.sda.projekt.cars_fleet.model.Role;
 import pl.sda.projekt.cars_fleet.repository.EmployeeRepository;
 import pl.sda.projekt.cars_fleet.repository.RoleRepository;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -36,7 +35,6 @@ public class EmployeeService {
     public Employee addNewEmployee(Employee employee){
         employee.setPassword(bCryptPasswordEncoder.encode(employee.getPassword()));
         Role userRole = roleRepository.findByRole("ADMIN");
-        userRole.setRole("ADMIN");
         employee.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         employee.setActive(1);
         return employeeRepository.save(employee);
@@ -73,6 +71,10 @@ public class EmployeeService {
 
     }
 
+    public Employee findByLogin(String login) {
+        return employeeRepository.findByLogin(login);
+    }
+
     public Employee updateEmployee(Long id, Employee employee) {
         Employee foundEmployee = employeeRepository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException(id, Employee.class.getName()));
@@ -82,5 +84,14 @@ public class EmployeeService {
         foundEmployee.setLastName(employee.getLastName());
 
         return employeeRepository.save(foundEmployee);
+    }
+
+    public Employee validateUser(Login login) {
+
+        Employee employee= employeeRepository.findByLogin(login.getUsername()) ;
+
+        if (bCryptPasswordEncoder.matches(login.getPassword(), employee.getPassword())) {
+            return employee;
+        } else return null;
     }
 }

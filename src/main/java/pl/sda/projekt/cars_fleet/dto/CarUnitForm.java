@@ -1,8 +1,6 @@
 package pl.sda.projekt.cars_fleet.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import pl.sda.projekt.cars_fleet.model.Car;
-import pl.sda.projekt.cars_fleet.model.CarUnit;
 
 import java.util.Date;
 

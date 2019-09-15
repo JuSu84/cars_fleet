@@ -10,8 +10,6 @@ import pl.sda.projekt.cars_fleet.repository.EmployeeRepository;
 
 import java.util.stream.IntStream;
 
-import static java.lang.String.format;
-
 @Component
 public class DataSetup implements CommandLineRunner {
 
