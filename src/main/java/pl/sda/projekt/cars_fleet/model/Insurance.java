@@ -1,9 +1,8 @@
 package pl.sda.projekt.cars_fleet.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.util.Date;
 
 
@@ -15,15 +14,18 @@ public class Insurance {
     private Date insuranceDate;
     private double insurancePrice;
     private int instalment;
+    @JsonIgnore
+    @OneToOne(mappedBy = "insurance")
+    private CarUnit carUnit;
 
     public Insurance() {
     }
 
-    public Insurance(Date insuranceDate, double insurancePrice, int instalment) {
-
+    public Insurance(Date insuranceDate, double insurancePrice, int instalment, CarUnit carUnit) {
         this.insuranceDate = insuranceDate;
         this.insurancePrice = insurancePrice;
         this.instalment = instalment;
+        this.carUnit = carUnit;
     }
 
 
@@ -58,5 +60,13 @@ public class Insurance {
 
     public void setInsuranceDate(Date insuranceDate) {
         this.insuranceDate = insuranceDate;
+    }
+
+    public CarUnit getCarUnit() {
+        return carUnit;
+    }
+
+    public void setCarUnit(CarUnit carUnit) {
+        this.carUnit = carUnit;
     }
 }

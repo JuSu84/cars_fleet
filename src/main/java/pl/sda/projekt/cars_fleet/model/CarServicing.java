@@ -1,9 +1,8 @@
 package pl.sda.projekt.cars_fleet.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -15,7 +14,8 @@ public class CarServicing {
     private Date lastServiceDate;
     private int mileage;
 
-
+    @OneToOne(mappedBy = "carServicing")
+    private CarUnit carUnit;
 
     public CarServicing() {
     }

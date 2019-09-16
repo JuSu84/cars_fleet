@@ -16,10 +16,10 @@ public class CarController {
         this.carService = carService;
     }
 
-    @PostMapping
-    public Car addNewCar(@RequestBody Car car) {
-        return carService.addNewCar(car);
-    }
+//    @PostMapping
+//    public Car addNewCar(@RequestBody Car car) {
+//        return carService.addNewCar(car);
+//    }
 
     @GetMapping
     public List<Car> getAllCars() {

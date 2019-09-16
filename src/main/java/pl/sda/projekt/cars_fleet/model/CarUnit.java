@@ -3,6 +3,7 @@ package pl.sda.projekt.cars_fleet.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class CarUnit {
@@ -10,15 +11,21 @@ public class CarUnit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "car_id")
     private Car car;
     private String registration;
-    @OneToOne
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "insurance_id", referencedColumnName = "id")
     private Insurance insurance;
-    @OneToOne
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "carServicing_id", referencedColumnName = "id")
     private CarServicing carServicing;
+    @OneToMany(mappedBy = "carUnit")
+    private Set<Task> taskSet;
 
 
 

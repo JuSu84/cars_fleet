@@ -10,6 +10,7 @@ import pl.sda.projekt.cars_fleet.model.Car;
 import pl.sda.projekt.cars_fleet.model.CarServicing;
 import pl.sda.projekt.cars_fleet.model.CarUnit;
 import pl.sda.projekt.cars_fleet.model.Insurance;
+import pl.sda.projekt.cars_fleet.repository.CarInsuranceRepository;
 import pl.sda.projekt.cars_fleet.repository.CarRepository;
 import pl.sda.projekt.cars_fleet.repository.CarUnitRepository;
 
@@ -23,30 +24,34 @@ public class CarUnitService {
     private CarUnitRepository carUnitRepository;
     private CarInsuranceService insuranceService;
     private CarServicingService carServicingService;
+    private CarInsuranceRepository insuranceRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(CarService.class);
 
 
-    public CarUnitService(CarService carService, CarRepository carRepository, CarUnitRepository carUnitRepository, CarInsuranceService insuranceService, CarServicingService carServicingService) {
+    public CarUnitService(CarService carService, CarRepository carRepository, CarUnitRepository carUnitRepository, CarInsuranceService insuranceService, CarServicingService carServicingService, CarInsuranceRepository insuranceRepository) {
         this.carService = carService;
         this.carRepository = carRepository;
         this.carUnitRepository = carUnitRepository;
         this.insuranceService = insuranceService;
         this.carServicingService = carServicingService;
+        this.insuranceRepository = insuranceRepository;
+
     }
+
 
     private CarUnit createNewCarUnit(CarUnitForm form) {
 
 
         Car car = carService.addNewCar(new Car(form.getMark(), form.getModel()));
 
-        Insurance insurance = insuranceService.addNewInsurance(new Insurance(form.getInsuranceDate(),form.getInsurancePrice(),form.getInstalment()));
-        CarServicing carServicing = carServicingService.addNewCarServicing(new CarServicing(form.getLastServiceDate(),form.getMileage()));
+//        Insurance insurance = insuranceService.addNewInsurance(new Insurance(form.getInsuranceDate(),form.getInsurancePrice(),form.getInstalment()));
+//        CarServicing carServicing = carServicingService.addNewCarServicing(new CarServicing(form.getLastServiceDate(),form.getMileage()));
         CarUnit result = new CarUnit();
 
         result.setRegistration(form.getRegistration());
-        result.setInsurance(insurance);
-        result.setCarServicing(carServicing);
+//        result.setInsurance(insurance);
+//        result.setCarServicing(carServicing);
 
         result.setCar(car);
         result.getCar().addCarUnitToList(result);
@@ -69,5 +74,13 @@ public class CarUnitService {
     public List<CarUnit> getListOfCarUnitsByMark(String mark) {
         Car car = carRepository.findByMark(mark).orElseThrow(()-> new ObjectNotFoundException(mark, CarUnit.class.getName()));
         return  carUnitRepository.findAllByCar(car);
+    }
+
+    public Insurance addNewInsuranceToCar(Long id, Insurance insurance) {
+        CarUnit result = carUnitRepository.findById(id).orElseThrow(()-> new ObjectNotFoundException(id, CarUnit.class.getName()));
+        result.setInsurance(insuranceService.addNewInsurance(insurance));
+        insurance.setCarUnit(getCarUnitById(id));
+        carUnitRepository.save(result);
+        return insurance;
     }
 }

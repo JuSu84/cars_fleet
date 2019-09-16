@@ -1,5 +1,7 @@
 package pl.sda.projekt.cars_fleet.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +24,7 @@ public class Car {
     Long id;
     private String mark;
     private String model;
-
+ @JsonIgnore
     @OneToMany(mappedBy = "car")
     private List<CarUnit> carUnits = new ArrayList<>();
 

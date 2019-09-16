@@ -1,8 +1,6 @@
 package pl.sda.projekt.cars_fleet.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -15,7 +13,9 @@ public class Task {
     private Date doneDate;
     private Date taskDeadline;
     private boolean done;
-
+    @ManyToOne
+    @JoinColumn(name = "carUnit_id")
+    private CarUnit carUnit;
     public Long getId() {
         return id;
     }

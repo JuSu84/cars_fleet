@@ -12,12 +12,12 @@ public class CarUnitForm {
 
     private String registration;
 
-    private double insurancePrice;
-    private Date insuranceDate;
-    private int instalment;
-
-    private Date lastServiceDate;
-    private int mileage;
+//    private double insurancePrice;
+//    private Date insuranceDate;
+//    private int instalment;
+//
+//    private Date lastServiceDate;
+//    private int mileage;
 
 
         public String getMark() {
@@ -44,43 +44,43 @@ public class CarUnitForm {
         this.registration = registration;
     }
 
-    public Date getLastServiceDate() {
-        return lastServiceDate;
-    }
-
-    public void setLastServiceDate(Date lastServiceDate) {
-        this.lastServiceDate = lastServiceDate;
-    }
-
-    public double getInsurancePrice() {
-        return insurancePrice;
-    }
-
-    public void setInsurancePrice(double insurancePrice) {
-        this.insurancePrice = insurancePrice;
-    }
-
-    public Date getInsuranceDate() {
-        return insuranceDate;
-    }
-
-    public void setInsuranceDate(Date insuranceDate) {
-        this.insuranceDate = insuranceDate;
-    }
-
-    public int getInstalment() {
-        return instalment;
-    }
-
-    public void setInstalment(int instalment) {
-        this.instalment = instalment;
-    }
-
-    public int getMileage() {
-        return mileage;
-    }
-
-    public void setMileage(int mileage) {
-        this.mileage = mileage;
-    }
+//    public Date getLastServiceDate() {
+//        return lastServiceDate;
+//    }
+//
+//    public void setLastServiceDate(Date lastServiceDate) {
+//        this.lastServiceDate = lastServiceDate;
+//    }
+//
+//    public double getInsurancePrice() {
+//        return insurancePrice;
+//    }
+//
+//    public void setInsurancePrice(double insurancePrice) {
+//        this.insurancePrice = insurancePrice;
+//    }
+//
+//    public Date getInsuranceDate() {
+//        return insuranceDate;
+//    }
+//
+//    public void setInsuranceDate(Date insuranceDate) {
+//        this.insuranceDate = insuranceDate;
+//    }
+//
+//    public int getInstalment() {
+//        return instalment;
+//    }
+//
+//    public void setInstalment(int instalment) {
+//        this.instalment = instalment;
+//    }
+//
+//    public int getMileage() {
+//        return mileage;
+//    }
+//
+//    public void setMileage(int mileage) {
+//        this.mileage = mileage;
+//    }
 }
