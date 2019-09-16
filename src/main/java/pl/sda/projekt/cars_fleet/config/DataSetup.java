@@ -3,6 +3,7 @@ package pl.sda.projekt.cars_fleet.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import pl.sda.projekt.cars_fleet.Services.EmployeeService;
 import pl.sda.projekt.cars_fleet.model.Car;
 import pl.sda.projekt.cars_fleet.model.Employee;
 import pl.sda.projekt.cars_fleet.model.Role;
@@ -18,12 +19,14 @@ public class DataSetup implements CommandLineRunner {
     private CarRepository carRepository;
     private EmployeeRepository employeeRepository;
     private RoleRepository roleRepository;
+    private EmployeeService employeeService;
 
     @Autowired
-    public DataSetup(CarRepository carRepository, EmployeeRepository employeeRepository, RoleRepository roleRepository) {
+    public DataSetup(CarRepository carRepository, EmployeeRepository employeeRepository, RoleRepository roleRepository, EmployeeService employeeService) {
         this.carRepository = carRepository;
         this.employeeRepository = employeeRepository;
         this.roleRepository = roleRepository;
+        this.employeeService =employeeService;
     }
 
 
@@ -55,7 +58,7 @@ public class DataSetup implements CommandLineRunner {
            // employeeRepository.save(employee);
         });
 
-
+//        employeeService.addNewEmployee(new Employee("admin", "admin", "admin@admin.pl","admin","admin", 1));
 
     }
 }

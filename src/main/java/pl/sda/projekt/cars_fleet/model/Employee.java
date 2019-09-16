@@ -2,6 +2,7 @@ package pl.sda.projekt.cars_fleet.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -13,6 +14,7 @@ public class Employee {
 
     @Id
     @GeneratedValue
+
     Long id;
     private String firstName;
     private String lastName;
@@ -28,9 +30,21 @@ public class Employee {
 
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "employee_role", joinColumns = @JoinColumn(name = "employee_id"),
+    @JoinTable(name = "employee_role", joinColumns = @JoinColumn(name = "employee_id", unique = true),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
+
+    public Employee() {
+    }
+
+//    public Employee(String firstName, String lastName, @Email String email, @NotBlank String login, @Length(min = 4, message = "*Your password must have at least 5 characters") @NotBlank(message = "*Please provide your password") String password, int active) {
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.email = email;
+//        this.login = login;
+//        this.password = password;
+//        this.active = active;
+//    }
 
     @JsonIgnore
     private int active;
@@ -98,4 +112,6 @@ public class Employee {
     public void setLastName(String lastName) {
         this.lastName = lastName.toLowerCase();
     }
+
+
 }

@@ -16,9 +16,7 @@ import pl.sda.projekt.cars_fleet.model.Role;
 import pl.sda.projekt.cars_fleet.repository.EmployeeRepository;
 import pl.sda.projekt.cars_fleet.repository.RoleRepository;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class EmployeeService {
@@ -37,9 +35,10 @@ public class EmployeeService {
     }
 
 
-    public Employee addNewEmployee(Employee employee){
+    public Employee addNewEmployee(Employee employee) {
         employee.setPassword(bCryptPasswordEncoder.encode(employee.getPassword()));
-        Role userRole = roleRepository.findByRole("ADMIN");
+        Role userRole = roleRepository.findByRole("ROLE_USER");
+        userRole.setEmployees(new HashSet<Employee>(Arrays.asList(employee)));
         employee.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         employee.setActive(1);
         return employeeRepository.save(employee);
@@ -63,7 +62,7 @@ public class EmployeeService {
     }
 
     public List<Employee> getEmployeeByLastName(String lastName) {
-       return Lists.newArrayList(employeeRepository.findAllByLastName(lastName));
+        return Lists.newArrayList(employeeRepository.findAllByLastName(lastName));
 
     }
 
@@ -87,16 +86,44 @@ public class EmployeeService {
 
         foundEmployee.setFirstName(employee.getFirstName());
         foundEmployee.setLastName(employee.getLastName());
+        foundEmployee.setRoles(employee.getRoles());
 
         return employeeRepository.save(foundEmployee);
     }
 
     public Employee validateUser(Login login) {
 
-        Employee employee= employeeRepository.findByLogin(login.getUsername()) ;
+        Employee employee = employeeRepository.findByLogin(login.getUsername());
 
         if (bCryptPasswordEncoder.matches(login.getPassword(), employee.getPassword())) {
             return employee;
         } else return null;
+    }
+
+//    public Employee setAdminRole(Long id) {
+//        Employee employee = employeeRepository.findById(id).get();
+//        Role adminRole = roleRepository.findByRole("ROLE_ADMIN");
+//        employee.getRoles().add(adminRole);
+//        adminRole.getEmployees().add(employee);
+//        return updateEmployee(id, employee);
+//
+//    }
+
+    public Employee setAdminRole(Long id) {
+        Employee foundEmployee = employeeRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException(id, Employee.class.getName()));
+
+        foundEmployee.setRoles(new HashSet<Role>(Arrays.asList(roleRepository.findByRole("ROLE_ADMIN"))));
+
+        return employeeRepository.save(foundEmployee);
+    }
+
+    public Employee setOnlyUserRole(Long id) {
+        Employee foundEmployee = employeeRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException(id, Employee.class.getName()));
+
+        foundEmployee.setRoles(new HashSet<Role>(Arrays.asList(roleRepository.findByRole("ROLE_USER"))));
+
+        return employeeRepository.save(foundEmployee);
     }
 }
