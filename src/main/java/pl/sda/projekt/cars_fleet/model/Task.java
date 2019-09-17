@@ -1,5 +1,7 @@
 package pl.sda.projekt.cars_fleet.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -13,6 +15,7 @@ public class Task {
     private Date doneDate;
     private Date taskDeadline;
     private boolean done;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "carUnit_id")
     private CarUnit carUnit;
@@ -54,5 +57,13 @@ public class Task {
 
     public void setDone(boolean done) {
         this.done = done;
+    }
+
+    public CarUnit getCarUnit() {
+        return carUnit;
+    }
+
+    public void setCarUnit(CarUnit carUnit) {
+        this.carUnit = carUnit;
     }
 }

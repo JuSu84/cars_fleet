@@ -16,7 +16,7 @@ public class CarInsuranceService {
 
     public Insurance addNewInsurance(Insurance insurance) {
 
-     Insurance savedInsurance = carInsuranceRepository.save(new Insurance(insurance.getInsuranceDate(), insurance.getInsurancePrice(), insurance.getInstalment(), insurance.getCarUnit()));
+     Insurance savedInsurance = carInsuranceRepository.save(new Insurance(insurance.getValidUntil(), insurance.getInsurancePrice(), insurance.getInstalment(), insurance.getCarUnit()));
 
         return savedInsurance;
     }

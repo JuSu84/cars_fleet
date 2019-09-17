@@ -11,7 +11,7 @@ public class CarServicing {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date lastServiceDate;
+    private Date nextServiceDate;
     private int mileage;
     @JsonIgnore
     @OneToOne(mappedBy = "carServicing")
@@ -20,8 +20,8 @@ public class CarServicing {
     public CarServicing() {
     }
 
-    public CarServicing(Date lastServiceDate, int mileage) {
-        this.lastServiceDate = lastServiceDate;
+    public CarServicing(Date nextServiceDate, int mileage) {
+        this.nextServiceDate = nextServiceDate;
         this.mileage = mileage;
     }
 
@@ -34,12 +34,12 @@ public class CarServicing {
     }
 
 
-    public Date getLastServiceDate() {
-        return lastServiceDate;
+    public Date getNextServiceDate() {
+        return nextServiceDate;
     }
 
-    public void setLastServiceDate(Date lastServiceDate) {
-        this.lastServiceDate = lastServiceDate;
+    public void setNextServiceDate(Date nextServiceDate) {
+        this.nextServiceDate = nextServiceDate;
     }
 
     public int getMileage() {

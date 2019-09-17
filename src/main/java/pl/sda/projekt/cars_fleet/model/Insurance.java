@@ -11,7 +11,7 @@ public class Insurance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    private Date insuranceDate;
+    private Date validUntil;
     private double insurancePrice;
     private int instalment;
     @JsonIgnore
@@ -21,8 +21,8 @@ public class Insurance {
     public Insurance() {
     }
 
-    public Insurance(Date insuranceDate, double insurancePrice, int instalment, CarUnit carUnit) {
-        this.insuranceDate = insuranceDate;
+    public Insurance(Date validUntil, double insurancePrice, int instalment, CarUnit carUnit) {
+        this.validUntil = validUntil;
         this.insurancePrice = insurancePrice;
         this.instalment = instalment;
         this.carUnit = carUnit;
@@ -54,12 +54,12 @@ public class Insurance {
         this.instalment = instalment;
     }
 
-    public Date getInsuranceDate() {
-        return insuranceDate;
+    public Date getValidUntil() {
+        return validUntil;
     }
 
-    public void setInsuranceDate(Date insuranceDate) {
-        this.insuranceDate = insuranceDate;
+    public void setValidUntil(Date validUntil) {
+        this.validUntil = validUntil;
     }
 
     public CarUnit getCarUnit() {

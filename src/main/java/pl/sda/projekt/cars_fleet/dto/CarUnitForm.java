@@ -44,11 +44,11 @@ public class CarUnitForm {
         this.registration = registration;
     }
 
-//    public Date getLastServiceDate() {
+//    public Date getNextServiceDate() {
 //        return lastServiceDate;
 //    }
 //
-//    public void setLastServiceDate(Date lastServiceDate) {
+//    public void setNextServiceDate(Date lastServiceDate) {
 //        this.lastServiceDate = lastServiceDate;
 //    }
 //
@@ -60,11 +60,11 @@ public class CarUnitForm {
 //        this.insurancePrice = insurancePrice;
 //    }
 //
-//    public Date getInsuranceDate() {
+//    public Date getValidUntil() {
 //        return insuranceDate;
 //    }
 //
-//    public void setInsuranceDate(Date insuranceDate) {
+//    public void setValidUntil(Date insuranceDate) {
 //        this.insuranceDate = insuranceDate;
 //    }
 //

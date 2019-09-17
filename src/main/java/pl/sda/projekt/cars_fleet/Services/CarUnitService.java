@@ -25,18 +25,19 @@ public class CarUnitService {
     private CarInsuranceService insuranceService;
     private CarServicingService carServicingService;
     private CarInsuranceRepository insuranceRepository;
+    private TaskService taskService;
 
     private static final Logger logger = LoggerFactory.getLogger(CarService.class);
 
 
-    public CarUnitService(CarService carService, CarRepository carRepository, CarUnitRepository carUnitRepository, CarInsuranceService insuranceService, CarServicingService carServicingService, CarInsuranceRepository insuranceRepository) {
+    public CarUnitService(CarService carService, CarRepository carRepository, CarUnitRepository carUnitRepository, CarInsuranceService insuranceService, CarServicingService carServicingService, CarInsuranceRepository insuranceRepository, TaskService taskService) {
         this.carService = carService;
         this.carRepository = carRepository;
         this.carUnitRepository = carUnitRepository;
         this.insuranceService = insuranceService;
         this.carServicingService = carServicingService;
         this.insuranceRepository = insuranceRepository;
-
+        this.taskService = taskService;
     }
 
 
@@ -45,8 +46,8 @@ public class CarUnitService {
 
         Car car = carService.addNewCar(new Car(form.getMark(), form.getModel()));
 
-//        Insurance insurance = insuranceService.addNewInsurance(new Insurance(form.getInsuranceDate(),form.getInsurancePrice(),form.getInstalment()));
-//        CarServicing carServicing = carServicingService.addNewCarServicing(new CarServicing(form.getLastServiceDate(),form.getMileage()));
+//        Insurance insurance = insuranceService.addNewInsurance(new Insurance(form.getValidUntil(),form.getInsurancePrice(),form.getInstalment()));
+//        CarServicing carServicing = carServicingService.addNewCarServicing(new CarServicing(form.getNextServiceDate(),form.getMileage()));
         CarUnit result = new CarUnit();
 
         result.setRegistration(form.getRegistration());
@@ -81,6 +82,7 @@ public class CarUnitService {
         result.setInsurance(insuranceService.addNewInsurance(insurance));
         insurance.setCarUnit(getCarUnitById(id));
         carUnitRepository.save(result);
+        taskService.generateInsuranceTask(id);
         return insurance;
     }
 
@@ -89,6 +91,7 @@ public class CarUnitService {
         result.setCarServicing(carServicingService.addNewCarServicing(carServicing));
         carServicing.setCarUnit(getCarUnitById(id));
         carUnitRepository.save(result);
+        taskService.generateCarServicingTask(id);
         return carServicing;
     }
 }

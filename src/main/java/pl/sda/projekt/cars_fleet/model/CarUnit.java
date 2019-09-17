@@ -3,6 +3,7 @@ package pl.sda.projekt.cars_fleet.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -25,7 +26,7 @@ public class CarUnit {
     @JoinColumn(name = "carServicing_id", referencedColumnName = "id")
     private CarServicing carServicing;
     @OneToMany(mappedBy = "carUnit")
-    private Set<Task> taskSet;
+    private Set<Task> taskSet = new HashSet<>();
 
 
 
@@ -71,5 +72,13 @@ public class CarUnit {
 
     public void setCarServicing(CarServicing carServicing) {
         this.carServicing = carServicing;
+    }
+
+    public Set<Task> getTaskSet() {
+        return taskSet;
+    }
+
+    public void setTaskSet(Set<Task> taskSet) {
+        this.taskSet = taskSet;
     }
 }
