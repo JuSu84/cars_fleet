@@ -16,7 +16,7 @@ public class InsuranceController {
         this.carUnitService = carUnitService;
     }
 
-    @PostMapping("/add_insurance{id}")
+    @PostMapping("/addInsurance{id}")
     public Insurance addInsurance(@PathVariable("id") Long id, @RequestBody Insurance insurance) {
        return carUnitService.addNewInsuranceToCar(id, insurance);
 

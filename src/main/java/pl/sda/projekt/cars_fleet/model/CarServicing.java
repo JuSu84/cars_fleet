@@ -13,7 +13,7 @@ public class CarServicing {
     private Long id;
     private Date lastServiceDate;
     private int mileage;
-
+    @JsonIgnore
     @OneToOne(mappedBy = "carServicing")
     private CarUnit carUnit;
 
@@ -48,5 +48,13 @@ public class CarServicing {
 
     public void setMileage(int mileage) {
         this.mileage = mileage;
+    }
+
+    public CarUnit getCarUnit() {
+        return carUnit;
+    }
+
+    public void setCarUnit(CarUnit carUnit) {
+        this.carUnit = carUnit;
     }
 }

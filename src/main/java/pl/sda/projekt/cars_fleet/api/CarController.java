@@ -16,36 +16,30 @@ public class CarController {
         this.carService = carService;
     }
 
-//    @PostMapping
-//    public Car addNewCar(@RequestBody Car car) {
-//        return carService.addNewCar(car);
-//    }
+    @PostMapping("/addCar")
+    public Car addNewCar(@RequestBody Car car) {
+        return carService.addNewCar(car);
+    }
 
-    @GetMapping
+    @GetMapping("/getAllCars")
     public List<Car> getAllCars() {
         return carService.getAllCars();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/getCarById{id}")
     public Car getCarById(@PathVariable("id") Long id) {
         return carService.getCarById(id);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/updateCarById{id}")
     public Car updateMessageById(@PathVariable("id") Long id, @RequestBody Car car) {
-        return carService.updateCar(id,car);
+        return carService.updateCar(id, car);
     }
 
-    @PutMapping("{mark},{model}")
-    public Car updateMessage(@PathVariable("mark") String mark, @PathVariable("model") String model, @RequestBody Car car) {
-        return carService.updateCar(mark, model, car);
-    }
-
-    @DeleteMapping("{id}")
+    @DeleteMapping("/deleteCarById{id}")
     public void deleteCar(@PathVariable("id") Long id) {
         carService.deleteCar(id);
     }
-//
 
 
 }

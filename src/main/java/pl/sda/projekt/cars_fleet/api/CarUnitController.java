@@ -15,36 +15,30 @@ import java.util.List;
 public class CarUnitController {
 
     private CarUnitService carUnitService;
-    private CarInsuranceService carInsuranceService;
-    private CarServicingService carServicingService;
 
-    public CarUnitController(CarUnitService carUnitService, CarInsuranceService carInsuranceService, CarServicingService carServicingService) {
+    public CarUnitController(CarUnitService carUnitService) {
         this.carUnitService = carUnitService;
-        this.carInsuranceService = carInsuranceService;
-        this.carServicingService = carServicingService;
     }
 
 
-    @PostMapping
+    @PostMapping("/addCarUnit")
     public CarUnit addNewCarUnit(@RequestBody CarUnitForm carForm) {
         return carUnitService.addNewCarUnit(carForm);
     }
 
-
-    @GetMapping
+    @GetMapping("/getAllCarUnits")
     public List<CarUnit> getAllCarUnits() {
         return carUnitService.getAllCarUnits();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/getCarUnitById{id}")
     public CarUnit getCarUnitById(@PathVariable("id") Long id) {
         return carUnitService.getCarUnitById(id);
     }
 
-    @GetMapping("{mark}")
+    @GetMapping("/getCatUnitByMark{mark}")
     public List<CarUnit> getListOfCarUnitsByMark(@PathVariable("mark") String mark) {
         return carUnitService.getListOfCarUnitsByMark(mark.toLowerCase());
     }
-
 
 }

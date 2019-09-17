@@ -2,7 +2,10 @@ package pl.sda.projekt.cars_fleet.Services;
 
 import org.springframework.stereotype.Service;
 import pl.sda.projekt.cars_fleet.model.CarServicing;
+import pl.sda.projekt.cars_fleet.model.Insurance;
 import pl.sda.projekt.cars_fleet.repository.CarServicingRepository;
+
+import java.util.Date;
 
 @Service
 public class CarServicingService {
@@ -14,6 +17,9 @@ public class CarServicingService {
     }
 
     public CarServicing addNewCarServicing(CarServicing carServicing) {
-        return carServicingRepository.save(carServicing);
+
+        CarServicing savedCarServicing = carServicingRepository.save(new CarServicing(carServicing.getLastServiceDate(), carServicing.getMileage()));
+        return savedCarServicing;
     }
+
 }

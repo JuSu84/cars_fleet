@@ -83,4 +83,12 @@ public class CarUnitService {
         carUnitRepository.save(result);
         return insurance;
     }
+
+    public CarServicing addNewCarServicingToCar(Long id, CarServicing carServicing) {
+        CarUnit result = carUnitRepository.findById(id).orElseThrow(()-> new ObjectNotFoundException(id, CarUnit.class.getName()));
+        result.setCarServicing(carServicingService.addNewCarServicing(carServicing));
+        carServicing.setCarUnit(getCarUnitById(id));
+        carUnitRepository.save(result);
+        return carServicing;
+    }
 }

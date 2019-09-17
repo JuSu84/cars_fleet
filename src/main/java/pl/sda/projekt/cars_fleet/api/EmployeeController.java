@@ -19,8 +19,6 @@ import java.util.Set;
 public class EmployeeController {
 
 
-    private SecurityContext securityContext;
-
     private EmployeeService employeeService;
     private RoleRepository roleRepository;
 
@@ -29,59 +27,53 @@ public class EmployeeController {
         this.roleRepository = roleRepository;
     }
 
-//    public EmployeeController(EmployeeService employeeService) {
-//        this.employeeService = employeeService;
-//    }
-
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping
+    @PostMapping("/addEmployee")
     public Employee addNewEmployee(@RequestBody Employee employee) {
         return employeeService.addNewEmployee(employee);
     }
 
     @PreAuthorize("hasRole('ROLE_USER')or hasRole('ROLE_ADMIN')")
-    @GetMapping
+    @GetMapping("/getAllEmployees")
     public List<Employee> getAllEmployees() {
         return employeeService.getAllEmployees();
     }
 
     @PreAuthorize("hasRole('ROLE_USER')or hasRole('ROLE_ADMIN')")
-    @GetMapping("{id}")
+    @GetMapping("/getEmployeeById{id}")
     public Employee getEmployeeById(@PathVariable("id") Long id) {
         return employeeService.getEmployeeById(id);
     }
 
 
-    @GetMapping("/lastname{lastname}")
+    @GetMapping("/getEmployeesByLastName{lastname}")
     public List<Employee> getEmployeeByLastName(@PathVariable("lastname") String lastName) {
         return employeeService.getEmployeeByLastName(lastName.toLowerCase());
     }
 
-    @GetMapping("/firstname{firstname}")
+    @GetMapping("/getEmployeesByFirstName{firstname}")
     public List<Employee> getEmployeeByFirstName(@PathVariable("firstname") String firstName) {
         return employeeService.getEmployeeByFirstName(firstName.toLowerCase());
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/deleteEmployeeById{id}")
     public void deleteEmployee(@PathVariable("id") Long id) {
         employeeService.deleteEmployee(id);
     }
 
-    @PutMapping("/update{id}")
+    @PutMapping("/updateEmployeeById{id}")
     public Employee updateEmployee(@PathVariable("id") Long id, @RequestBody Employee employee) {
         return employeeService.updateEmployee(id, employee);
     }
 
-    @PutMapping("/add_admin_role{id}")
+    @PutMapping("/addAdminRoleById{id}")
     public Employee addAdminRole(@PathVariable("id") Long id) {
         return employeeService.setAdminRole(id);
-
     }
 
     @PutMapping("/add_user_role{id}")
     public Employee addUserRole(@PathVariable("id") Long id) {
         return employeeService.setOnlyUserRole(id);
-
     }
 
 }
