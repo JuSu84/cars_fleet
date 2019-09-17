@@ -61,4 +61,14 @@ public class TaskService {
         return Lists.newArrayList(taskRepository.findAll());
     }
 
+    public Task updateTask (Long id, Task task){
+        Task foundTask = taskRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException(id, Task.class.getName()));
+
+        foundTask.setTaskName(foundTask.getTaskName() + ": Task done");
+        foundTask.setDone(true);
+        foundTask.setDoneDate(task.getDoneDate());
+        return  taskRepository.save(foundTask);
+    }
+
 }
