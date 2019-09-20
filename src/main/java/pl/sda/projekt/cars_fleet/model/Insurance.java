@@ -3,6 +3,7 @@ package pl.sda.projekt.cars_fleet.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -11,7 +12,7 @@ public class Insurance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    private Date validUntil;
+    private LocalDate validUntil;
     private double insurancePrice;
     private int instalment;
     @JsonIgnore
@@ -21,7 +22,7 @@ public class Insurance {
     public Insurance() {
     }
 
-    public Insurance(Date validUntil, double insurancePrice, int instalment, CarUnit carUnit) {
+    public Insurance(LocalDate validUntil, double insurancePrice, int instalment, CarUnit carUnit) {
         this.validUntil = validUntil;
         this.insurancePrice = insurancePrice;
         this.instalment = instalment;
@@ -54,11 +55,11 @@ public class Insurance {
         this.instalment = instalment;
     }
 
-    public Date getValidUntil() {
+    public LocalDate getValidUntil() {
         return validUntil;
     }
 
-    public void setValidUntil(Date validUntil) {
+    public void setValidUntil(LocalDate validUntil) {
         this.validUntil = validUntil;
     }
 

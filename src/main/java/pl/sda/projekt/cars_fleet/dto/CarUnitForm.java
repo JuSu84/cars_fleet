@@ -9,18 +9,10 @@ public class CarUnitForm {
 
     private String mark;
     private String model;
-
     private String registration;
 
-//    private double insurancePrice;
-//    private Date insuranceDate;
-//    private int instalment;
-//
-//    private Date lastServiceDate;
-//    private int mileage;
 
-
-        public String getMark() {
+    public String getMark() {
         return mark;
     }
 
@@ -44,43 +36,4 @@ public class CarUnitForm {
         this.registration = registration;
     }
 
-//    public Date getNextServiceDate() {
-//        return lastServiceDate;
-//    }
-//
-//    public void setNextServiceDate(Date lastServiceDate) {
-//        this.lastServiceDate = lastServiceDate;
-//    }
-//
-//    public double getInsurancePrice() {
-//        return insurancePrice;
-//    }
-//
-//    public void setInsurancePrice(double insurancePrice) {
-//        this.insurancePrice = insurancePrice;
-//    }
-//
-//    public Date getValidUntil() {
-//        return insuranceDate;
-//    }
-//
-//    public void setValidUntil(Date insuranceDate) {
-//        this.insuranceDate = insuranceDate;
-//    }
-//
-//    public int getInstalment() {
-//        return instalment;
-//    }
-//
-//    public void setInstalment(int instalment) {
-//        this.instalment = instalment;
-//    }
-//
-//    public int getMileage() {
-//        return mileage;
-//    }
-//
-//    public void setMileage(int mileage) {
-//        this.mileage = mileage;
-//    }
 }

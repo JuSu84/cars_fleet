@@ -3,6 +3,8 @@ package pl.sda.projekt.cars_fleet.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Entity
@@ -12,13 +14,15 @@ public class Task {
     @GeneratedValue
     Long id;
     private String taskName;
-    private Date doneDate;
-    private Date taskDeadline;
+    private LocalDate doneDate;
+    private LocalDate taskDeadline;
     private boolean done;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "carUnit_id")
     private CarUnit carUnit;
+
     public Long getId() {
         return id;
     }
@@ -35,19 +39,19 @@ public class Task {
         this.taskName = taskName.toLowerCase();
     }
 
-    public Date getDoneDate() {
+    public LocalDate getDoneDate() {
         return doneDate;
     }
 
-    public void setDoneDate(Date doneDate) {
+    public void setDoneDate(LocalDate doneDate) {
         this.doneDate = doneDate;
     }
 
-    public Date getTaskDeadline() {
+    public LocalDate getTaskDeadline() {
         return taskDeadline;
     }
 
-    public void setTaskDeadline(Date taskDeadline) {
+    public void setTaskDeadline(LocalDate taskDeadline) {
         this.taskDeadline = taskDeadline;
     }
 
@@ -65,5 +69,12 @@ public class Task {
 
     public void setCarUnit(CarUnit carUnit) {
         this.carUnit = carUnit;
+    }
+
+    @Override
+    public String toString() {
+        return  taskName + '\'' +
+                ", for car: " + carUnit.getCar().getMark().toUpperCase() + " "+ carUnit.getCar().getModel().toUpperCase() + "   "+ carUnit.getRegistration().toUpperCase() +
+                ", until " + taskDeadline.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy")) + ".";
     }
 }

@@ -11,10 +11,11 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private int id;
-@Column(unique = true)
+
+    @Column(unique = true)
     private String role;
+
     @JsonIgnore
     @ManyToMany(mappedBy = "roles")
     private Set<Employee> employees = new HashSet<>();

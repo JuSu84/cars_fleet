@@ -33,7 +33,7 @@ public class EmployeeController {
         return employeeService.addNewEmployee(employee);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER')or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/getAllEmployees")
     public List<Employee> getAllEmployees() {
         return employeeService.getAllEmployees();
@@ -45,12 +45,13 @@ public class EmployeeController {
         return employeeService.getEmployeeById(id);
     }
 
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/getEmployeesByLastName{lastname}")
     public List<Employee> getEmployeeByLastName(@PathVariable("lastname") String lastName) {
         return employeeService.getEmployeeByLastName(lastName.toLowerCase());
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/getEmployeesByFirstName{firstname}")
     public List<Employee> getEmployeeByFirstName(@PathVariable("firstname") String firstName) {
         return employeeService.getEmployeeByFirstName(firstName.toLowerCase());
@@ -74,6 +75,12 @@ public class EmployeeController {
     @PutMapping("/add_user_role{id}")
     public Employee addUserRole(@PathVariable("id") Long id) {
         return employeeService.setOnlyUserRole(id);
+    }
+
+    @PutMapping("/addCarUnitToEmployee{carId},{empId}")
+    public Employee addCarUnitToEmployee(@PathVariable("carId") Long carId, @PathVariable("empId") Long empId ) {
+
+      return employeeService.addCarUnitToEmployee(carId, empId);
     }
 
 }

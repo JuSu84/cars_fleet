@@ -6,17 +6,22 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+
 @Entity
 public class CarUnit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-//    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "car_id")
     private Car car;
     private String registration;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "employee_id", referencedColumnName = "id")
+    private Employee employee;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "insurance_id", referencedColumnName = "id")
@@ -46,7 +51,6 @@ public class CarUnit {
 
         this.car = car;
     }
-
 
 
     public String getRegistration() {
@@ -80,5 +84,13 @@ public class CarUnit {
 
     public void setTaskSet(Set<Task> taskSet) {
         this.taskSet = taskSet;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }

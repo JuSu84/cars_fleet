@@ -6,14 +6,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import pl.sda.projekt.cars_fleet.dto.CarUnitForm;
-import pl.sda.projekt.cars_fleet.model.Car;
-import pl.sda.projekt.cars_fleet.model.CarServicing;
-import pl.sda.projekt.cars_fleet.model.CarUnit;
-import pl.sda.projekt.cars_fleet.model.Insurance;
+import pl.sda.projekt.cars_fleet.model.*;
 import pl.sda.projekt.cars_fleet.repository.CarInsuranceRepository;
 import pl.sda.projekt.cars_fleet.repository.CarRepository;
 import pl.sda.projekt.cars_fleet.repository.CarUnitRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -45,14 +43,9 @@ public class CarUnitService {
 
 
         Car car = carService.addNewCar(new Car(form.getMark(), form.getModel()));
-
-//        Insurance insurance = insuranceService.addNewInsurance(new Insurance(form.getValidUntil(),form.getInsurancePrice(),form.getInstalment()));
-//        CarServicing carServicing = carServicingService.addNewCarServicing(new CarServicing(form.getNextServiceDate(),form.getMileage()));
         CarUnit result = new CarUnit();
 
         result.setRegistration(form.getRegistration());
-//        result.setInsurance(insurance);
-//        result.setCarServicing(carServicing);
 
         result.setCar(car);
         result.getCar().addCarUnitToList(result);
@@ -61,6 +54,10 @@ public class CarUnitService {
 
     public CarUnit addNewCarUnit(CarUnitForm carForm) {
         return carUnitRepository.save(createNewCarUnit(carForm));
+    }
+
+    public CarUnit saveCarUnit(CarUnit carUnit) {
+        return carUnitRepository.save(carUnit);
     }
 
 
@@ -93,5 +90,26 @@ public class CarUnitService {
         carUnitRepository.save(result);
         taskService.generateCarServicingTask(id);
         return carServicing;
+    }
+
+    public Task addTaskToCar(Long id, Task task) {
+        CarUnit carUnit = getCarUnitById(id);
+        Task savedTask = new Task();
+        savedTask.setCarUnit(carUnit);
+        savedTask.setTaskDeadline(task.getTaskDeadline());
+        savedTask.setDone(false);
+        savedTask.setTaskName(task.getTaskName());
+        carUnit.getTaskSet().add(task);
+
+        saveCarUnit(carUnit);
+        return taskService.saveTask(task);
+    }
+
+    public Task updateTaskAsDone(Long id) {
+       Task doneTask = taskService.getTaskById(id);
+       doneTask.setDoneDate(LocalDate.now());
+       doneTask.setDone(true);
+      return taskService.saveTask(doneTask);
+
     }
 }

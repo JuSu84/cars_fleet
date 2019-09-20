@@ -4,61 +4,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import pl.sda.projekt.cars_fleet.Services.EmployeeService;
-import pl.sda.projekt.cars_fleet.model.Car;
-import pl.sda.projekt.cars_fleet.model.Employee;
-import pl.sda.projekt.cars_fleet.model.Role;
+import pl.sda.projekt.cars_fleet.Services.EmailServiceImpl;
 import pl.sda.projekt.cars_fleet.repository.CarRepository;
 import pl.sda.projekt.cars_fleet.repository.EmployeeRepository;
 import pl.sda.projekt.cars_fleet.repository.RoleRepository;
-
-import java.util.stream.IntStream;
+import pl.sda.projekt.cars_fleet.repository.TaskRepository;
 
 @Component
 public class DataSetup implements CommandLineRunner {
 
+
+
+    @Autowired
+    private EmailServiceImpl emailServiceImpl;
     private CarRepository carRepository;
     private EmployeeRepository employeeRepository;
     private RoleRepository roleRepository;
     private EmployeeService employeeService;
+    private TaskRepository taskRepository;
 
     @Autowired
-    public DataSetup(CarRepository carRepository, EmployeeRepository employeeRepository, RoleRepository roleRepository, EmployeeService employeeService) {
+    public DataSetup(CarRepository carRepository, EmployeeRepository employeeRepository, RoleRepository roleRepository, EmployeeService employeeService, TaskRepository taskRepository) {
         this.carRepository = carRepository;
         this.employeeRepository = employeeRepository;
         this.roleRepository = roleRepository;
-        this.employeeService =employeeService;
+        this.employeeService = employeeService;
+        this.taskRepository = taskRepository;
     }
-
-
 
 
 
     @Override
     public void run (String... args) throws Exception {
-        String[] models = {"Mondeo", "Mustang", "Fiesta", "Focus"};
-        String[] names = {"Tomek", "Romek", "Wojtek", "Irek"};
-        String[] lastNames= {"Kowalski", "Tatarak", "Noga", "Pietruszka"};
 
-
-
-        IntStream.range(0, 4).forEach((i) -> {
-            Car car = new Car();
-            car.setModel(models[i]);
-            car.setMark("ford");
-           // carRepository.save(car);
-
-        });
-
-        IntStream.range(0, 4).forEach((i) -> {
-
-
-            Employee employee = new Employee();
-            employee.setFirstName(names[i]);
-            employee.setLastName(lastNames[i]);
-           // employeeRepository.save(employee);
-        });
-
-//        employeeService.addNewEmployee(new Employee("admin", "admin", "admin@admin.pl","admin","admin", 1));
 
     }
 }

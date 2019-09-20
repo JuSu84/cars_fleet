@@ -3,6 +3,7 @@ package pl.sda.projekt.cars_fleet.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -11,7 +12,7 @@ public class CarServicing {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date nextServiceDate;
+    private LocalDate nextServiceDate;
     private int mileage;
     @JsonIgnore
     @OneToOne(mappedBy = "carServicing")
@@ -20,7 +21,7 @@ public class CarServicing {
     public CarServicing() {
     }
 
-    public CarServicing(Date nextServiceDate, int mileage) {
+    public CarServicing(LocalDate nextServiceDate, int mileage) {
         this.nextServiceDate = nextServiceDate;
         this.mileage = mileage;
     }
@@ -34,11 +35,11 @@ public class CarServicing {
     }
 
 
-    public Date getNextServiceDate() {
+    public LocalDate getNextServiceDate() {
         return nextServiceDate;
     }
 
-    public void setNextServiceDate(Date nextServiceDate) {
+    public void setNextServiceDate(LocalDate nextServiceDate) {
         this.nextServiceDate = nextServiceDate;
     }
 

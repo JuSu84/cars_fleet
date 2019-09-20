@@ -13,8 +13,7 @@ import java.util.Set;
 public class Employee {
 
     @Id
-    @GeneratedValue
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     private String firstName;
     private String lastName;
@@ -29,6 +28,10 @@ public class Employee {
     private String password;
 
     @JsonIgnore
+    @OneToOne(mappedBy = "employee")
+    private CarUnit carUnit;
+
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "employee_role", joinColumns = @JoinColumn(name = "employee_id", unique = true),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -36,15 +39,6 @@ public class Employee {
 
     public Employee() {
     }
-
-//    public Employee(String firstName, String lastName, @Email String email, @NotBlank String login, @Length(min = 4, message = "*Your password must have at least 5 characters") @NotBlank(message = "*Please provide your password") String password, int active) {
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.email = email;
-//        this.login = login;
-//        this.password = password;
-//        this.active = active;
-//    }
 
     @JsonIgnore
     private int active;
@@ -113,6 +107,11 @@ public class Employee {
         this.lastName = lastName.toLowerCase();
     }
 
+    public CarUnit getCarUnit() {
+        return carUnit;
+    }
 
-
+    public void setCarUnit(CarUnit carUnit) {
+        this.carUnit = carUnit;
+    }
 }

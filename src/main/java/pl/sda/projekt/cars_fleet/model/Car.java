@@ -24,7 +24,8 @@ public class Car {
     Long id;
     private String mark;
     private String model;
- @JsonIgnore
+
+    @JsonIgnore
     @OneToMany(mappedBy = "car")
     private List<CarUnit> carUnits = new ArrayList<>();
 
@@ -60,7 +61,7 @@ public class Car {
         this.carUnits = carUnits;
     }
 
-    public void addCarUnitToList(CarUnit carUnit){
+    public void addCarUnitToList(CarUnit carUnit) {
         this.carUnits.add(carUnit);
     }
 
