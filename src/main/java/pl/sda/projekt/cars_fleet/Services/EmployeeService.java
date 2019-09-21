@@ -52,7 +52,10 @@ public class EmployeeService {
 
     public void deleteEmployee(Long id) {
         if (employeeRepository.existsById(id)) {
-            employeeRepository.deleteById(id);
+
+           Employee employee =  employeeRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(id, Employee.class.getName()));
+                    employee.getRoles().clear();
+           employeeRepository.deleteById(id);
         } else {
             throw new ObjectNotFoundException(id, Employee.class.getName());
         }
