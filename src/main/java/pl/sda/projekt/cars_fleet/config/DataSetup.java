@@ -2,6 +2,7 @@ package pl.sda.projekt.cars_fleet.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import pl.sda.projekt.cars_fleet.Services.EmployeeService;
 import pl.sda.projekt.cars_fleet.Services.EmailServiceImpl;

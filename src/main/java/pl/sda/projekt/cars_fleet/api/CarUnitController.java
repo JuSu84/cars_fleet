@@ -1,5 +1,6 @@
 package pl.sda.projekt.cars_fleet.api;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.projekt.cars_fleet.Services.CarInsuranceService;
@@ -21,6 +22,7 @@ public class CarUnitController {
         this.carUnitService = carUnitService;
     }
 
+    @ResponseStatus(value = HttpStatus.CREATED)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/addCarUnit")
     public CarUnit addNewCarUnit(@RequestBody CarUnitForm carForm) {

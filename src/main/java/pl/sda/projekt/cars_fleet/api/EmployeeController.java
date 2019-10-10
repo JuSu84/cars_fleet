@@ -1,6 +1,7 @@
 package pl.sda.projekt.cars_fleet.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.web.bind.annotation.*;
@@ -27,11 +28,13 @@ public class EmployeeController {
         this.roleRepository = roleRepository;
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @ResponseStatus(value = HttpStatus.CREATED)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/addEmployee")
     public Employee addNewEmployee(@RequestBody Employee employee) {
         return employeeService.addNewEmployee(employee);
     }
+
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/getAllEmployees")
@@ -57,26 +60,31 @@ public class EmployeeController {
         return employeeService.getEmployeeByFirstName(firstName.toLowerCase());
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/deleteEmployeeById{id}")
     public void deleteEmployee(@PathVariable("id") Long id) {
         employeeService.deleteEmployee(id);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/updateEmployeeById{id}")
     public Employee updateEmployee(@PathVariable("id") Long id, @RequestBody Employee employee) {
         return employeeService.updateEmployee(id, employee);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/addAdminRoleById{id}")
     public Employee addAdminRole(@PathVariable("id") Long id) {
         return employeeService.setAdminRole(id);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/add_user_role{id}")
     public Employee addUserRole(@PathVariable("id") Long id) {
         return employeeService.setOnlyUserRole(id);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/addCarUnitToEmployee{carId},{empId}")
     public Employee addCarUnitToEmployee(@PathVariable("carId") Long carId, @PathVariable("empId") Long empId ) {
 

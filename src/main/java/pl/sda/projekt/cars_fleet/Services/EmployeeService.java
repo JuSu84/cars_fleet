@@ -2,7 +2,9 @@ package pl.sda.projekt.cars_fleet.Services;
 
 import com.google.common.collect.Lists;
 import org.hibernate.ObjectNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.sda.projekt.cars_fleet.model.*;
@@ -13,28 +15,24 @@ import pl.sda.projekt.cars_fleet.repository.RoleRepository;
 import java.util.*;
 
 @Service
+@EnableAsync
 public class EmployeeService {
 
-
-    @Autowired
     private EmailServiceImpl emailServiceImpl;
     private EmployeeRepository employeeRepository;
     private CarUnitRepository carUnitRepository;
     private RoleRepository roleRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private TaskService taskService;
 
-    @Autowired
-    public EmployeeService(EmailServiceImpl emailServiceImpl, EmployeeRepository employeeRepository, CarUnitRepository carUnitRepository, RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public EmployeeService(EmailServiceImpl emailServiceImpl, EmployeeRepository employeeRepository, CarUnitRepository carUnitRepository, RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder, TaskService taskService) {
         this.emailServiceImpl = emailServiceImpl;
         this.employeeRepository = employeeRepository;
         this.carUnitRepository = carUnitRepository;
         this.roleRepository = roleRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.taskService = taskService;
     }
-
-
-
-
 
     public Employee addNewEmployee(Employee employee) {
 
@@ -139,8 +137,19 @@ public class EmployeeService {
         for (Task task: foundCarUnit.getTaskSet()) {
             emailServiceImpl.sendMail(foundEmployee, task);
         }
-
       return    employeeRepository.save(foundEmployee);
+    }
 
+
+    
+
+    @Async
+    @Scheduled(cron = "0 20 15 * * ?")
+    public void sendMailReminder() {
+        List<Task> tasks = taskService.getAllTasks();
+
+        for (Task task: tasks) {
+            emailServiceImpl.sendMail(getEmployeeById(2l), task);
+        }
     }
 }
