@@ -1,19 +1,16 @@
 package pl.sda.projekt.cars_fleet.api;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContext;
+
 import org.springframework.web.bind.annotation.*;
 import pl.sda.projekt.cars_fleet.Services.EmployeeService;
 import pl.sda.projekt.cars_fleet.model.Employee;
-import pl.sda.projekt.cars_fleet.model.Role;
+
 import pl.sda.projekt.cars_fleet.repository.RoleRepository;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 @RestController
 @RequestMapping("/employees/")
@@ -21,11 +18,11 @@ public class EmployeeController {
 
 
     private EmployeeService employeeService;
-    private RoleRepository roleRepository;
 
-    public EmployeeController(EmployeeService employeeService, RoleRepository roleRepository) {
+
+    public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
-        this.roleRepository = roleRepository;
+
     }
 
     @ResponseStatus(value = HttpStatus.CREATED)
@@ -86,9 +83,9 @@ public class EmployeeController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/addCarUnitToEmployee{carId},{empId}")
-    public Employee addCarUnitToEmployee(@PathVariable("carId") Long carId, @PathVariable("empId") Long empId ) {
+    public Employee addCarUnitToEmployee(@PathVariable("carId") Long carId, @PathVariable("empId") Long empId) {
 
-      return employeeService.addCarUnitToEmployee(carId, empId);
+        return employeeService.addCarUnitToEmployee(carId, empId);
     }
 
 }
