@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import pl.sda.projekt.cars_fleet.Services.EmployeeService;
 import pl.sda.projekt.cars_fleet.model.Employee;
 
-import pl.sda.projekt.cars_fleet.repository.RoleRepository;
 
 import java.util.List;
 
@@ -46,14 +45,14 @@ public class EmployeeController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/getEmployeesByLastName{lastname}")
-    public List<Employee> getEmployeeByLastName(@PathVariable("lastname") String lastName) {
+    @GetMapping("/getEmployeesByLastName{lastName}")
+    public List<Employee> getEmployeeByLastName(@PathVariable("lastName") String lastName) {
         return employeeService.getEmployeeByLastName(lastName.toLowerCase());
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/getEmployeesByFirstName{firstname}")
-    public List<Employee> getEmployeeByFirstName(@PathVariable("firstname") String firstName) {
+    @GetMapping("/getEmployeesByFirstName{firstName}")
+    public List<Employee> getEmployeeByFirstName(@PathVariable("firstName") String firstName) {
         return employeeService.getEmployeeByFirstName(firstName.toLowerCase());
     }
 
