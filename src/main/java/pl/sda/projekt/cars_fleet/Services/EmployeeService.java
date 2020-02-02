@@ -134,22 +134,15 @@ public class EmployeeService {
 
         foundCarUnit.setEmployee(foundEmployee);
         carUnitRepository.save(foundCarUnit);
-        for (Task task: foundCarUnit.getTaskSet()) {
-            emailServiceImpl.sendMail(foundEmployee, task);
-        }
+            emailServiceImpl.sendMail(foundEmployee);
       return    employeeRepository.save(foundEmployee);
     }
 
 
-    
-
     @Async
     @Scheduled(cron = "0 20 15 * * ?")
     public void sendMailReminder() {
-        List<Task> tasks = taskService.getAllTasks();
-
-        for (Task task: tasks) {
-            emailServiceImpl.sendMail(getEmployeeById(2l), task);
-        }
+        getAllEmployees().stream().forEach(e -> emailServiceImpl.sendMail(e));
     }
+
 }

@@ -14,6 +14,9 @@ import org.springframework.stereotype.Service;
 import pl.sda.projekt.cars_fleet.model.Employee;
 import pl.sda.projekt.cars_fleet.model.Task;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 
@@ -26,14 +29,15 @@ public class EmailServiceImpl {
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
-    public void sendMail(Employee employee, Task task) {
+    public void sendMail(Employee employee) {
 
         SimpleMailMessage mail = new SimpleMailMessage();
 
         mail.setFrom("carsfleetapp@gmail.com");
         mail.setTo(employee.getEmail());
         mail.setSubject("New Task!");
-        mail.setText("Dear " + employee.getFirstName().toUpperCase() + ". " + "You have to " + task.toString());
+
+        mail.setText("Dear " + employee.getFirstName().toUpperCase() + ". " + "You have to " + getTasks(employee));
 
         logger.info("Sending...");
 
@@ -41,5 +45,12 @@ public class EmailServiceImpl {
 
         logger.info("Done!");
     }
+
+    public StringBuilder getTasks(Employee employee) {
+        StringBuilder tasks = new StringBuilder();
+        employee.getCarUnit().getTaskSet().stream().forEach(task -> tasks.append(", " + toString()));
+        return tasks;
+    }
+
 
 }
